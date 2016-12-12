@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="抄抄抄,DOM," />
+  <meta name="keywords" content="总结,React," />
 
 
 
@@ -90,31 +90,19 @@
 
 
 
-<meta name="description" content="最近, 看到别人使用 querySelector, 而我之前根本没听过。所以找到 MDN 上的资料
-简单知识介绍
-DOM 扩展
-
-它属于 DOM 扩展的部分。
-对 DOM 的两个主要的扩展是 Selectors API 和 HTML5，这两个扩展都源自开发社区, 而将某些常见做法及 API 标准化, 一直是众望所归。">
+<meta name="description" content="最近一直在使用 React 开发页面，所以对 React 相关的文章什么的都留意了些。在查资料的时候经常看到关于 React 服务端渲染这个话题，但是都没有去看文章，只不过心里一直有疑问，为什么需要服务端渲染，
+SEO后来知道因为所有内容都是写在 React 里面，即 js 里面的，需要 js 去填充主要的内容到 index.html，而 js 加载是在 index.html 已经渲染出来了之后才">
 <meta property="og:type" content="article">
-<meta property="og:title" content="querySelector">
-<meta property="og:url" content="http://zhangxiaoxu.com/2016/12/03/querySelector/index.html">
+<meta property="og:title" content="React-Router 一点一点深入">
+<meta property="og:url" content="http://zhangxiaoxu.com/2016/12/11/router/index.html">
 <meta property="og:site_name" content="Vivian blog">
-<meta property="og:description" content="最近, 看到别人使用 querySelector, 而我之前根本没听过。所以找到 MDN 上的资料
-简单知识介绍
-DOM 扩展
-
-它属于 DOM 扩展的部分。
-对 DOM 的两个主要的扩展是 Selectors API 和 HTML5，这两个扩展都源自开发社区, 而将某些常见做法及 API 标准化, 一直是众望所归。">
-<meta property="og:updated_time" content="2016-12-05T06:15:12.000Z">
+<meta property="og:description" content="最近一直在使用 React 开发页面，所以对 React 相关的文章什么的都留意了些。在查资料的时候经常看到关于 React 服务端渲染这个话题，但是都没有去看文章，只不过心里一直有疑问，为什么需要服务端渲染，
+SEO后来知道因为所有内容都是写在 React 里面，即 js 里面的，需要 js 去填充主要的内容到 index.html，而 js 加载是在 index.html 已经渲染出来了之后才">
+<meta property="og:updated_time" content="2016-12-12T04:06:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="querySelector">
-<meta name="twitter:description" content="最近, 看到别人使用 querySelector, 而我之前根本没听过。所以找到 MDN 上的资料
-简单知识介绍
-DOM 扩展
-
-它属于 DOM 扩展的部分。
-对 DOM 的两个主要的扩展是 Selectors API 和 HTML5，这两个扩展都源自开发社区, 而将某些常见做法及 API 标准化, 一直是众望所归。">
+<meta name="twitter:title" content="React-Router 一点一点深入">
+<meta name="twitter:description" content="最近一直在使用 React 开发页面，所以对 React 相关的文章什么的都留意了些。在查资料的时候经常看到关于 React 服务端渲染这个话题，但是都没有去看文章，只不过心里一直有疑问，为什么需要服务端渲染，
+SEO后来知道因为所有内容都是写在 React 里面，即 js 里面的，需要 js 去填充主要的内容到 index.html，而 js 加载是在 index.html 已经渲染出来了之后才">
 
 
 
@@ -142,13 +130,13 @@ DOM 扩展
 
 
 
-  <link rel="canonical" href="http://zhangxiaoxu.com/2016/12/03/querySelector/"/>
+  <link rel="canonical" href="http://zhangxiaoxu.com/2016/12/11/router/"/>
 
 
 
 
 
-  <title> querySelector | Vivian blog </title>
+  <title> React-Router 一点一点深入 | Vivian blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -289,7 +277,7 @@ DOM 扩展
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://zhangxiaoxu.com/2016/12/03/querySelector/">
+  <link itemprop="mainEntityOfPage" href="http://zhangxiaoxu.com/2016/12/11/router/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Vivian">
@@ -313,7 +301,7 @@ DOM 扩展
             
             
               
-                querySelector
+                React-Router 一点一点深入
               
             
           </h1>
@@ -326,8 +314,8 @@ DOM 扩展
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-03T00:00:00+08:00">
-                2016-12-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-11T22:47:26+08:00">
+                2016-12-11
               </time>
             
 
@@ -380,65 +368,53 @@ DOM 扩展
       
 
       
-        <p>最近, 看到别人使用 querySelector, 而我之前根本没听过。所以找到 MDN 上的资料</p>
-<h3 id="简单知识介绍"><a href="#简单知识介绍" class="headerlink" title="简单知识介绍"></a>简单知识介绍</h3><ul>
-<li>DOM 扩展</li>
-</ul>
-<p>它属于 DOM 扩展的部分。</p>
-<p>对 DOM 的两个主要的扩展是 Selectors API 和 HTML5，这两个扩展都源自开发社区, 而将某些常见做法及 API 标准化, 一直是众望所归。</p>
-<a id="more"></a>
-<p>此外还有一个不那么引人注目的 Element Traversal ( 元素遍历 ) 规范，为 DOM 添加了一些属性。</p>
+        <p>最近一直在使用 React 开发页面，所以对 React 相关的文章什么的都留意了些。在查资料的时候经常看到关于 React 服务端渲染这个话题，但是都没有去看文章，只不过心里一直有疑问，为什么需要服务端渲染，</p>
+<h4 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h4><p>后来知道因为所有内容都是写在 React 里面，即 js 里面的，需要 js 去填充主要的内容到 index.html，而 js 加载是在 index.html 已经渲染出来了之后才执行的事。<br>而爬虫们呢，一般只会爬初始的 html 页面，所以导致爬虫们什么关键的内容都爬不到，因此 SEO 不好。</p>
+<p>所以可以选择，服务器端渲染，然后将一个完整的 html 页面给 浏览器端使用。</p>
+<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>然后，昨天知道第二个原因。</p>
+<p>就是路由相关。<br>我昨天再浏览自己做的 demo 网页的时候，突然发现我一刷新返回了 404，本来以为是网络什么的问题，分别拿电脑，别人的手机，别的网页都试了几次，发现的确一直是这个样子的，于是我疑惑为什么？</p>
+<p>刚开始稍微想了下，单页应用，就是只有一个页面，具体的 url 匹配操作应该是 react-router 在做的事。想起来刚开始配 webpack-dev-server 的时候，就是只有主页面能请求到东西，后来把 server 的 historyApiFallback 设置为 true，就可以了。</p>
+<p>然后在 google 上找相关资料，找到了 stackoverflow  的这个 <a href="http://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually" target="_blank" rel="external">React-router urls don’t work when refreshing or writting manually</a></p>
+<p>然后这个最赞的回复我觉得讲得挺清楚的：</p>
+<h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><p>出现的原因就是过去只有 server 来解析 url , 而现在有 2 个了。</p>
+<p>当用户通过 <a href="http://example.com/about" target="_blank" rel="external">http://example.com/about</a> 来访问页面的时候，<br>过去的请求一个 url 的时候，直接是发给 server 端的，由 Server 来解析 URL 中的路径 /about，然后判断该返回哪个页面给 用户，之后将页面返回。</p>
+<p>现在由 React-router 给提供的客户端渲染，事情简单了很多。</p>
 <ul>
-<li>Selectors API</li>
+<li><p>第一步：刚开始的时候，客户端没有任何 JS 代码，所以第一个请求 ( <a href="http://example.com" target="_blank" rel="external">http://example.com</a> )一定是发给 <strong>Server</strong> 的，然后 Server 返回一个页面，页面中含有<strong>请求 React 和 React-router</strong> 的 script 标签。<br>然后，当请求到了 React /React-router 时候就开始了第二步。</p>
+</li>
+<li><p>第二步：假设用户点击了 ‘<strong>About us</strong>‘ 这个链接 ，只改变了<strong>本地 URL</strong>到 <a href="http://example.com/about" target="_blank" rel="external">http://example.com/about</a> ( 利用 <strong>History API </strong>), 而<strong>没有</strong>向 服务器端发任何请求，而是 <strong>React-router </strong>替代Server这个工作，它解析了 URL 中的路径，判断哪个 Resct view 去 渲染, 然后渲染它。假设 about 页面不需要任何 rest 调用，你已经完成了。 这样 不需要任何 的 服务端调用， 页面从 Home 到  About us。</p>
+</li>
 </ul>
-<p>是由 W3C 发起制定的一个标准, 致力于让浏览器原生支持 CSS 查询。之前所有实现着一功能的 JS 库，都会写一个基础的 CSS 解析器，然后再使用已有的 DOM 方法查询文档找到匹配的点。</p>
-<p>而把这个功能变成原生 API 之后，解析和树的查询操作可以在浏览器内部通过编译后的代码来完成，极大的改善了性能。</p>
-<p>Selectors API Level 1 的核心是两个方法：<br><strong>querySelector()</strong> 和 <strong>querySelectorAll()</strong>， 可以通过 Document 及 ELement 类型的实例调用它们。</p>
-<p>已完全支持的浏览器 IE8+, Firefox 3.5+, Safari 3.1+, Chrome 和 Opera 10+</p>
-<h3 id="document-querySelector-Element-querySelector"><a href="#document-querySelector-Element-querySelector" class="headerlink" title="document.querySelector /  Element.querySelector()"></a>document.querySelector /  Element.querySelector()</h3><ul>
-<li>语法： element = document.querySelector( selectors )</li>
-<li>selectors: 是一个字符串，包含一个或是多个 css 选择器，多个以逗号隔开。</li>
-</ul>
-<p>比如: 找到 div 标签中的 input 标签。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;user-panel main&quot;&gt;</div><div class="line">    &lt;input name=&quot;login&quot;/&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var el = document.querySelector(&quot;div.user-panel.main input[name=login]&quot;);</div></pre></td></tr></table></figure>
+<p>所以当你<strong>点击</strong>一个链接的时候，运行的 JS 操纵地址栏中的 URL, 它不会让页面<strong>重新刷新</strong>，而是让 <strong>React-router</strong> 去执行客户端的页面转换。</p>
+<p>现在考虑一下，当你复制这个 URL ( <a href="http://example.com/about" target="_blank" rel="external">http://example.com/about</a> ) 给你朋友 ，她粘贴 URL 到地址栏上的时候。</p>
+<p>这个时候她相当于还在<strong>第一步</strong>，因为没有下载网页，也没有 React-Router 运行。所以会向 <strong>Server</strong> 发送请求访问。</p>
+<p>这里就是问题所在。现在，你只是放了一个静态 HTML 在你 server 的网站根目录中，但是当请求访问其他 URLs 的时候 server 会返回 404。</p>
+<p>同样的 URLs 访问正常是因为 React-router 做了这些路由的工作，但是 Server 肯定失败，除非<strong>你能让 Server 端也能解析这些 URL</strong>。</p>
+<h5 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h5><p>主要是这几种:</p>
 <ul>
-<li><p>element 是 <strong>一个</strong> element 对象 ( DOM 元素 )</p>
+<li><p>完全绕开这个问题 ( Hash History )</p>
 </li>
-<li><p>如果没有找到匹配的元素，则返回 null。</p>
+<li><p>设置 Server 端所有 URL ( /* ) 都返回 相同的 index.html ( 通过使用 Browser History并且设置 Server 返回 index.html ),</p>
 </li>
-<li><p>找到多个，返回第一个匹配到的元素。</p>
+<li><p>在特定的路由上增加一些脚本，( 用简单的 PHP 返回一些 有内容的重要的页面。。<strong>这个不懂</strong>  )( Hybrid 混合方式？ )</p>
 </li>
-<li><p>Css 伪类不会返回任何元素。</p>
-</li>
-<li><p>如果要匹配的ID或选择器不符合 CSS 语法（比如不恰当地使用了冒号或者空格），你必须用反斜杠将这些字符转义。由于 JavaScript 中，反斜杠是转义字符，所以当你输入一个文本串时，你必须将它转义两次（一次是为 JavaScript 字符串转义，另一次是为 querySelector 转义）</p>
+<li><p>在 Server 端 ( Node.js ) 和客户端运行同样的 JS ( Isomorphic )</p>
 </li>
 </ul>
-<p>比如: 匹配 id 为  foo\bar 的DOM</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.querySelector(&apos;#foo\\\\bar&apos;);</div></pre></td></tr></table></figure>
-<h4 id="document-querySelectorAll-Element-querySelectorAll"><a href="#document-querySelectorAll-Element-querySelectorAll" class="headerlink" title="document.querySelectorAll ( Element.querySelectorAll() )"></a>document.querySelectorAll ( Element.querySelectorAll() )</h4><ul>
-<li><p>elementList = document.querySelectorAll(Selectors);</p>
-</li>
-<li><p>elementList 是一个 <strong>non-live</strong> 的 NodeList 类型的对象.  ( 静态的 )</p>
-</li>
-<li><p>selectors 是一个由逗号连接的包含一个或多个CSS选择器的字符串.</p>
-</li>
-</ul>
-<p>比如: 返回一个文档中所有的 class 为 “note” / “alert” 的 div 元素。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var matches = document.querySelectorAll(&quot;div.note, div.alert&quot;);</div></pre></td></tr></table></figure>
-<ul>
-<li>WebKit 内核的浏览器有一个 <strong>bug</strong>: 如果 selectors参数中包含 CSS伪类, 返回的elementList 包含一个<html> 元素,而不是空的.</html></li>
-</ul>
+<h4 id="我的解决方法"><a href="#我的解决方法" class="headerlink" title="我的解决方法"></a>我的解决方法</h4><p>因为，我们 Server 端是 <strong>nginx</strong> ，所以选择了第二种方法。</p>
+<p>本来是想让 男票搞定的，但是，我们两对 nginx 的语法都不是很熟，所以我搜了一个发现这个 <a href="https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#configuring-your-server" target="_blank" rel="external">react-router/docs/guides/Histories.md</a>。</p>
+<h2 id="然后照着那个一设置，OK-了！"><a href="#然后照着那个一设置，OK-了！" class="headerlink" title="然后照着那个一设置，OK 了！"></a>然后照着那个一设置，OK 了！</h2><h5 id="牛逼闪闪的男票补充："><a href="#牛逼闪闪的男票补充：" class="headerlink" title="牛逼闪闪的男票补充："></a>牛逼闪闪的男票补充：</h5><p>但是，所有的都返回 index.html 能用，但是不太安全，也不太合理。</p>
+<p>只有用户刷新／直接打开其他页面的时候，才会出问题。大部分页面，用户不会直接输入url 打开的。</p>
+<p>所以，只把用户会输入 url 直接打开的页面，配一下就好了。</p>
+<p>也就是在这几个特定的路由上增加一些脚本，让他们直接返回 index.html, 而这个特定的路由的概念，又可以扩展为 所有有效的 URL</p>
+<p>而URL ( /* )  匹配的时候，有效无效的，都会匹配上，这是不合理的。</p>
+<p>我怎么就没有想到呢···· (￣∇￣)</p>
 <hr>
-<p> <strong>NOTE!!</strong></p>
-<p>element.querySelector / element.querySelectorAll</p>
-<pre><code>查找的时候都包含 element
-</code></pre><hr>
-<blockquote><p>参考链接：</p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList" target="_blank" rel="external">MDN: NodeList</a></p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelectorAll" target="_blank" rel="external">MDN: Document.querySelectorAll</a></p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelector" target="_blank" rel="external">MDN: Document.querySelector</a></p>
-<p><em>JS高级程序设计 ( 第3版 )</em></p>
+<p>虽然，这个问题解决了，但是还是对 SEO 不好的。以后肯定会用上 <strong>Isomorphic</strong> 的方案的，嗯，我就先占个坑吧，毕竟，Node.js 还没有学会。。。。</p>
+<blockquote><p>参考：</p>
+<p><a href="http://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually" target="_blank" rel="external">React-router urls don’t work when refreshing or writting manually</a></p>
+<p><a href="https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#configuring-your-server" target="_blank" rel="external">react-router/docs/guides/Histories.md</a></p>
+<p><a href="http://stylechen.com/react-router.html" target="_blank" rel="external">从 React Router 谈谈路由的那些事</a></p>
 </blockquote>
 
       
@@ -463,9 +439,9 @@ DOM 扩展
       
         <div class="post-tags">
           
-            <a href="/tags/抄抄抄/" rel="tag"># 抄抄抄</a>
+            <a href="/tags/总结/" rel="tag"># 总结</a>
           
-            <a href="/tags/DOM/" rel="tag"># DOM</a>
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -474,8 +450,8 @@ DOM 扩展
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/03/nodelist/" rel="next" title="nodeList">
-                <i class="fa fa-chevron-left"></i> nodeList
+              <a href="/2016/12/11/margin collaspe/" rel="next" title="折叠外边距 ( Collapsing margins )">
+                <i class="fa fa-chevron-left"></i> 折叠外边距 ( Collapsing margins )
               </a>
             
           </div>
@@ -483,10 +459,6 @@ DOM 扩展
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/04/ci/" rel="prev" title="从文章到网页的操作流程以及 CI 设置">
-                从文章到网页的操作流程以及 CI 设置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -640,7 +612,7 @@ DOM 扩展
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单知识介绍"><span class="nav-number">1.</span> <span class="nav-text">简单知识介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#document-querySelector-Element-querySelector"><span class="nav-number">2.</span> <span class="nav-text">document.querySelector /  Element.querySelector()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#document-querySelectorAll-Element-querySelectorAll"><span class="nav-number">2.1.</span> <span class="nav-text">document.querySelectorAll ( Element.querySelectorAll() )</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SEO"><span class="nav-number">1.</span> <span class="nav-text">SEO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路由"><span class="nav-number">2.</span> <span class="nav-text">路由</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原因"><span class="nav-number">2.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方法"><span class="nav-number">2.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#我的解决方法"><span class="nav-number">3.</span> <span class="nav-text">我的解决方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后照着那个一设置，OK-了！"><span class="nav-number"></span> <span class="nav-text">然后照着那个一设置，OK 了！</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#牛逼闪闪的男票补充："><span class="nav-number">0.1.</span> <span class="nav-text">牛逼闪闪的男票补充：</span></a></li></ol></li></ol></div>
             
 
           </div>
