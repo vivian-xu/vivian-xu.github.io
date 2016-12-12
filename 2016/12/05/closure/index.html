@@ -93,10 +93,10 @@
 <meta name="description" content="基础知识
 闭包是指有权访问另一个函数作用域中的变量的函数。
 
-创建闭包的常见方式：在一个函数内部创建另一个函数
+创建闭包的常见方式：在 一个函数内部创建另一个函数
 
 
-1234567891011121314function createComparisonFunction(propertyName) &amp;#123;    return function(obj1, obj2) &amp;#123;        var v1 = obj1[propertyN">
+1234567891011121314function createComparisonFunction(propertyName) &amp;#123;    return function(obj1, obj2) &amp;#123;        var v1 = obj1[property">
 <meta property="og:type" content="article">
 <meta property="og:title" content="闭包">
 <meta property="og:url" content="http://zhangxiaoxu.com/2016/12/05/closure/index.html">
@@ -104,20 +104,20 @@
 <meta property="og:description" content="基础知识
 闭包是指有权访问另一个函数作用域中的变量的函数。
 
-创建闭包的常见方式：在一个函数内部创建另一个函数
+创建闭包的常见方式：在 一个函数内部创建另一个函数
 
 
-1234567891011121314function createComparisonFunction(propertyName) &amp;#123;    return function(obj1, obj2) &amp;#123;        var v1 = obj1[propertyN">
-<meta property="og:updated_time" content="2016-12-05T06:26:51.000Z">
+1234567891011121314function createComparisonFunction(propertyName) &amp;#123;    return function(obj1, obj2) &amp;#123;        var v1 = obj1[property">
+<meta property="og:updated_time" content="2016-12-10T06:49:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闭包">
 <meta name="twitter:description" content="基础知识
 闭包是指有权访问另一个函数作用域中的变量的函数。
 
-创建闭包的常见方式：在一个函数内部创建另一个函数
+创建闭包的常见方式：在 一个函数内部创建另一个函数
 
 
-1234567891011121314function createComparisonFunction(propertyName) &amp;#123;    return function(obj1, obj2) &amp;#123;        var v1 = obj1[propertyN">
+1234567891011121314function createComparisonFunction(propertyName) &amp;#123;    return function(obj1, obj2) &amp;#123;        var v1 = obj1[property">
 
 
 
@@ -386,7 +386,7 @@
         <h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
 <li><p>闭包是指有权访问另一个函数作用域中的变量的函数。</p>
 </li>
-<li><p>创建闭包的常见方式：在一个函数内部创建另一个函数</p>
+<li><p>创建闭包的常见方式：在 一个函数内部创建另一个函数</p>
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function createComparisonFunction(propertyName) &#123;</div><div class="line">    return function(obj1, obj2) &#123;</div><div class="line">        var v1 = obj1[propertyName]; // 这里两行访问了外部函数的变量</div><div class="line">        var v2 = obj2[propertyName]; // 这里两行访问了外部函数的变量</div><div class="line"></div><div class="line">        if(v1 &lt; v2) &#123;</div><div class="line">            return -1;</div><div class="line">        &#125; else if (v1 &gt; v2) &#123;</div><div class="line">            return 1;</div><div class="line">        &#125; else &#123;</div><div class="line">            return 0;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -595,7 +595,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -612,7 +612,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
