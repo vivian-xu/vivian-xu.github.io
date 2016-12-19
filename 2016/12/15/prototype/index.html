@@ -1,0 +1,779 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Dosis:300,300italic,400,400italic,700,700italic|Courgette:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="抄抄抄,JS 基础,原型,prototype," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这块好难理解，从最基础的开始,为了便于自己以后还能想起来，多写了很多废话
+构造函数，原型，实例
+构造函数都有一个 原型对象( 原型 ) prototype
+
+构造函数的 原型对象 ( prototype ) 里，都包含了一个指向 构造函数的指针 ( constructor )
+
+由于每个对象都有一原型， prototype 也有一个指向它的原型的指针( __proto__ )
+
+实例都包含了一个指">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型">
+<meta property="og:url" content="http://zhangxiaoxu.com/2016/12/15/prototype/index.html">
+<meta property="og:site_name" content="Vivian blog">
+<meta property="og:description" content="这块好难理解，从最基础的开始,为了便于自己以后还能想起来，多写了很多废话
+构造函数，原型，实例
+构造函数都有一个 原型对象( 原型 ) prototype
+
+构造函数的 原型对象 ( prototype ) 里，都包含了一个指向 构造函数的指针 ( constructor )
+
+由于每个对象都有一原型， prototype 也有一个指向它的原型的指针( __proto__ )
+
+实例都包含了一个指">
+<meta property="og:image" content="http://img.jackon.me/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-16%20%E4%B8%8A%E5%8D%881.48.19.png">
+<meta property="og:image" content="http://img.jackon.me/proto_null.png">
+<meta property="og:updated_time" content="2016-12-19T03:30:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原型">
+<meta name="twitter:description" content="这块好难理解，从最基础的开始,为了便于自己以后还能想起来，多写了很多废话
+构造函数，原型，实例
+构造函数都有一个 原型对象( 原型 ) prototype
+
+构造函数的 原型对象 ( prototype ) 里，都包含了一个指向 构造函数的指针 ( constructor )
+
+由于每个对象都有一原型， prototype 也有一个指向它的原型的指针( __proto__ )
+
+实例都包含了一个指">
+<meta name="twitter:image" content="http://img.jackon.me/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-16%20%E4%B8%8A%E5%8D%881.48.19.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangxiaoxu.com/2016/12/15/prototype/"/>
+
+
+
+
+
+  <title> 原型 | Vivian blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a36fb7c2597833dc69c07d45b78570ca";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vivian blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">better Me ❤️</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zhangxiaoxu.com/2016/12/15/prototype/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Vivian">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Vivian blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Vivian blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                原型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T23:26:15+08:00">
+                2016-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这块好难理解，<br>从最基础的开始,<br>为了便于自己以后还能想起来，多写了很多废话</p>
+<h3 id="构造函数，原型，实例"><a href="#构造函数，原型，实例" class="headerlink" title="构造函数，原型，实例"></a>构造函数，原型，实例</h3><ul>
+<li><p>构造函数都有一个 <strong>原型对象( 原型 )</strong> prototype</p>
+</li>
+<li><p>构造函数的 原型对象 ( prototype ) 里，都包含了一个指向 <strong>构造函数</strong>的指针 ( constructor )</p>
+</li>
+<li><p>由于每个对象都有一原型， prototype 也有一个指向它的原型的指针( <code>__proto__</code> )</p>
+</li>
+<li><p>实例都包含了一个指向 <strong>原型对象( prototype )内部</strong>的指针 (<code>__proto__</code>)。</p>
+</li>
+</ul>
+<a id="more"></a>
+<p><em><strong>NOTE</strong></em>:<br>constructor:<br>为了让每个对象知道 创造它的构造函数是谁，所以每一个 构造函数的 原型对象( prototype , 继承下去的 )  上都有一个 constructor 指向 它( 构造函数  ) 自己。( 心机 )</p>
+<p>下来看下实验</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">// 构造函数 createA</div><div class="line">// createA 的原型对象( prototype ) 有一个属性是 constructor,  constructor 是指向 createA 的</div><div class="line"></div><div class="line">function createA() &#123;&#125;</div><div class="line"></div><div class="line">console.log(&apos;function createA()&apos;);</div><div class="line">console.log( `createA.prototype: $&#123;createA.prototype&#125;` );</div><div class="line">console.log( `createA.prototype.constructor: $&#123;createA.prototype.constructor&#125;` );</div><div class="line"></div><div class="line">// objectA 是 createA 的一个实例</div><div class="line">// objectA 有一个 __proto__ 属性是指向 objectA.prototype ( 构造函数的原型对象 ) __内部__ 的</div><div class="line"></div><div class="line">let objectA = new createA();</div><div class="line"></div><div class="line">// objectB 也有一个 __proto__ 属性，指向哪里呢？</div><div class="line"></div><div class="line">let objectB = objectA;</div><div class="line"></div><div class="line">console.log(&apos;objectA&apos;);</div><div class="line">console.log(&apos;objectB&apos;);</div><div class="line"></div><div class="line">console.log( `objectA: $&#123;objectA&#125;` );</div><div class="line">console.log( `objectB: $&#123;objectB&#125;` );</div><div class="line"></div><div class="line">console.log(`objectA.__proto__: $&#123;objectA.__proto__&#125;`);</div><div class="line">console.log( `objectB.__proto__: $&#123;objectB.__proto__&#125;` );</div><div class="line"></div><div class="line">console.log(`objectA.__proto__.constructor: $&#123;objectA.__proto__.constructor&#125;`);</div><div class="line">console.log( `objectB.__proto__.constructor: $&#123;objectB.__proto__.constructor&#125;` );</div></pre></td></tr></table></figure>
+<p>结果:<br><img src="http://img.jackon.me/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-16%20%E4%B8%8A%E5%8D%881.48.19.png" alt=""></p>
+<p>也就是说：</p>
+<p><code>objectA = objectB</code>, A 就是 B 就是 A, 所以  <strong>构造函数</strong> 之下就只有一层, 也就是 构造函数 这个 <em>爸爸/ 妈妈</em> <strong>只有</strong> 儿女，<em>没有</em> 孙子 / 孙女 或者  孙孙子 / 孙孙女 。。。。之类</p>
+<p>那么，<strong>构造函数 的原型对象</strong> (createA.prototype) 也是一个 <em>对象</em>，那么 这个<em>对象</em>的 原型 ( <code>createA.prototype.__proto__</code> ) 是什么？<br>如果把它 (构造函数 的原型对象) 看成 实例的话，那么 它的 原型 (<code>__proto__</code>) 应该指向 它的 构造函数的原型对象 ( 也就是说 <code>createA.prototype.__proto__.constructor</code> `应该指向它的构造函数 ) 。那么这个构造函数是什么呢?</p>
+<p>测试一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function createA() &#123;&#125;</div><div class="line"></div><div class="line">console.log(&apos;function createA()&apos;);</div><div class="line">console.log( `createA.prototype: $&#123;createA.prototype&#125;` );</div><div class="line"></div><div class="line">console.log( `createA.prototype.constructor: $&#123;createA.prototype.constructor&#125;` );</div><div class="line"></div><div class="line">console.log( `createA.prototype.__proto__: $&#123;createA.prototype.__proto__&#125;` );</div><div class="line"></div><div class="line">console.log( `createA.prototype.__proto__.constructor: $&#123;createA.prototype.__proto__.constructor&#125;` );</div><div class="line"></div><div class="line">console.log( `createA.prototype.__proto__._proto__: $&#123;createA.prototype.__proto__.__proto__&#125;` );</div></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="http://img.jackon.me/proto_null.png" alt=""></p>
+<p>看到结果想起来，每个 <strong>函数</strong>都是 <strong>对象</strong>，<br>所以 函数的 原型对象的 构造函数 ( <code>createA.prototype.__proto__.constructor</code>) 是 function object( ){ } ( JS 默认的所有对象的构造函数 ),<br>因为函数都有对象原型 (function object() {} 的 对象原型，也就是<code>createA.prototype.__proto__</code> ) ，<br>-所以 这个对象原型的 <code>__proto__</code> 是什么呢？<br> 答案是 <strong>null</strong>。JS 中所有的原型链的最终都是 <strong>null</strong></p>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
+<li>是实现 _继承__ 的主要方法</li>
+<li><p>基本思想是利用 <em>原型</em>让一个 <em>引用类型</em> <strong>继承</strong>另一个<em>引用类型</em>的 <strong>属性和方法</strong>。</p>
+</li>
+<li><p>假如，我们让 原型对象 等于 另一个类型的 <em>实例</em>，此时的原型对象将包含一个指向 另一个原型对象 (prototype) 的指针(<code>__proto__</code>)。相应的，另一个原型对象 ( <strong>prototype</strong>) 中也包含着一个指向另一个构造函数(<strong>constructor</strong>) 的指针。</p>
+</li>
+</ul>
+<p>👆的看得不是很懂。。。</p>
+<p>上个星期写到了这里，写不下去了。。</p>
+<p>昨天晚上向男票寻求帮助，感觉差不多了， 但是。。。 要先去面试，回来再补</p>
+<blockquote><p>哎呀。。好像还有参考别的人的。。。容我面试回来，翻一翻。。</p>
+<p>参考：<br><em>JavaScript 高级程序设计</em></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/抄抄抄/" rel="tag"># 抄抄抄</a>
+          
+            <a href="/tags/JS-基础/" rel="tag"># JS 基础</a>
+          
+            <a href="/tags/原型/" rel="tag"># 原型</a>
+          
+            <a href="/tags/prototype/" rel="tag"># prototype</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/15/promise/" rel="next" title="promise">
+                <i class="fa fa-chevron-left"></i> promise
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/16/XMLHttpRequest/" rel="prev" title="XMLHttpRequest">
+                XMLHttpRequest <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Vivian" />
+          <p class="site-author-name" itemprop="name">Vivian</p>
+          <p class="site-description motion-element" itemprop="description">从现在开始</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/vivian-xu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+          
+
+          
+            
+
+              <span class="links-of-author-item">
+                
+                  <i class="fa fa-fw fa-map-marker"></i>
+                
+                Shanghai
+              </span>
+
+            
+
+              <span class="links-of-author-item">
+                
+                  <i class="fa fa-fw fa-envelope"></i>
+                
+                hi@zhangxiaoxu.com
+              </span>
+
+            
+          
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数，原型，实例"><span class="nav-number">1.</span> <span class="nav-text">构造函数，原型，实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链"><span class="nav-number">2.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念："><span class="nav-number">2.1.</span> <span class="nav-text">概念：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vivian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
