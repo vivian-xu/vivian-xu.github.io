@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="抄抄抄,JS 基础,原型,prototype," />
+  <meta name="keywords" content="抄抄抄,JS 基础,总结,原型,prototype," />
 
 
 
@@ -114,7 +114,7 @@
 实例都包含了一个指">
 <meta property="og:image" content="http://img.jackon.me/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-16%20%E4%B8%8A%E5%8D%881.48.19.png">
 <meta property="og:image" content="http://img.jackon.me/proto_null.png">
-<meta property="og:updated_time" content="2016-12-19T03:30:29.000Z">
+<meta property="og:updated_time" content="2016-12-22T15:49:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型">
 <meta name="twitter:description" content="这块好难理解，从最基础的开始,为了便于自己以后还能想起来，多写了很多废话
@@ -416,7 +416,15 @@
 <p>结果：</p>
 <p><img src="http://img.jackon.me/proto_null.png" alt=""></p>
 <p>看到结果想起来，每个 <strong>函数</strong>都是 <strong>对象</strong>，<br>所以 函数的 原型对象的 构造函数 ( <code>createA.prototype.__proto__.constructor</code>) 是 function object( ){ } ( JS 默认的所有对象的构造函数 ),<br>因为函数都有对象原型 (function object() {} 的 对象原型，也就是<code>createA.prototype.__proto__</code> ) ，<br>-所以 这个对象原型的 <code>__proto__</code> 是什么呢？<br> 答案是 <strong>null</strong>。JS 中所有的原型链的最终都是 <strong>null</strong></p>
-<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
+<h4 id="小小的总结一下"><a href="#小小的总结一下" class="headerlink" title="小小的总结一下"></a>小小的总结一下</h4><p>JS 数据类型分为两种, 一种是 <strong>基本数据类型( 数值字面量, 不是 object )</strong>。</p>
+<p>第二种就是 <strong>Object (复杂数据类型, 引用类型值，对象 ) 类型</strong>。</p>
+<p>而 Object 中包括了许多类型 ( Array, Function, RegExp )</p>
+<p>而这些<strong>复杂数据类型</strong> <em>每一个</em> 都代表着<em>一个</em> <strong>构造函数</strong>。<br>也就是说,<br><strong>每一个 数组 都是 Function Array ( Array 构造函数 )的实例，</strong> 每一个实例都是 它的构造函数的</p>
+<p>每一个 <strong>非 Function 类型的对象</strong> 的 <strong>原型</strong> 都指向着 相应 的<strong>构造函数的 原型对象</strong> ( 比如  <code>array.__prop__</code> –&gt; Array.prototype ( function Array), <code>string.__proto__ --&gt; Object.prototype (function Object)</code> )。</p>
+<p>而 function 类型的原型对象 ( prototype ) 是 function Object。</p>
+<p>而最终 <strong>function Object</strong> 的原型对象 ( prototype ) 是 <strong>null</strong></p>
+<p> ! ! NOTE:<br> 这里没有 函数类型的原型 –&gt; function function (function 构造函数) 之说。</p>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ul>
 <li>是实现 _继承__ 的主要方法</li>
 <li><p>基本思想是利用 <em>原型</em>让一个 <em>引用类型</em> <strong>继承</strong>另一个<em>引用类型</em>的 <strong>属性和方法</strong>。</p>
 </li>
@@ -426,8 +434,42 @@
 <p>👆的看得不是很懂。。。</p>
 <p>上个星期写到了这里，写不下去了。。</p>
 <p>昨天晚上向男票寻求帮助，感觉差不多了， 但是。。。 要先去面试，回来再补</p>
-<blockquote><p>哎呀。。好像还有参考别的人的。。。容我面试回来，翻一翻。。</p>
-<p>参考：<br><em>JavaScript 高级程序设计</em></p>
+<hr>
+<p>update</p>
+<h4 id="我的理解"><a href="#我的理解" class="headerlink" title="我的理解"></a>我的理解</h4><p>原型链可以这样理解:</p>
+<p>每一个对象都是一个 container , 这个 container 里面都是些 key:value ( 键值对 )。 container 分为两部分，<strong>第一部分</strong> 是自身包含的属性，方法。<strong>第二部分</strong> 就是一个指向原型的指针 (prototype / <em>prop</em>)。</p>
+<p>而最重要的区别就是，寻找一个 key 的顺序。</p>
+<p>当我们寻找一个 key 的时候。首先，程序会从这个对象 ( container ) 的第一部分找起, 如果第一部分没有，则到 <strong>第二部分</strong>，根据指针到它所指的地址的对象 ( 原型对象 ) 上找。同样，原型对象也是一个 container, 它的结构跟之前的对象结构完全一样，所以在它的第一部分找不到的时候，程序会到它的第二部分的指针所指的对象 ( 原型对象 ) 上去找，而这个对象与前两个的结构也完全一样…… 就这样不停的寻找，直到找到寻找的 key, 完。</p>
+<p>而在这个寻找的过程中, 一个对象与另一个对象相连，形成的 <strong>链</strong>。<br>而，基本上每一个 container 的第二部分的指针都是指向 <strong>它的原型对象</strong> ( <em>这个对象往往也是 构造它自己的<strong>构造函数</strong>的 <strong>原型对象</strong></em> ) 。<br>而通过理论知识我们知道 ( 还有上面的实验 )。 最终这个链是 <strong>止</strong> 于 <strong>null</strong> 的。</p>
+<p><strong>如何能使这个链条更长呢? 使某一个</strong></p>
+<p>看到上面的 Object 类型, 所有 非 function Object 的 function 类型的 原型指针 都指向了 function Object 的原型对象。</p>
+<p><strong>也就是 <strong>function</strong> 类型的, 可以将 原型链 连起来～</strong></p>
+<p>那么怎么连起来呢？</p>
+<p>假设，我们有 function A(){} ,  function B(){}</p>
+<p>我想到了 2 种方法:</p>
+<ul>
+<li>直接使 它们两个的 prototype 相等，即：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A.prototype = B.prototype;</div></pre></td></tr></table></figure>
+<p>根据 JS 的引用赋值, 我们知道，A.prototype 与 B.prototype 现在指向的是同一个地址。</p>
+<p>当任何一方改动这个 地址的值，另一方取得的值也改变了。</p>
+<p>而且 指向 <strong>构造函数 A</strong> 的指针( construct ) 指向了 <strong>B</strong>, ( 实例找不到爸爸了！ ), 而且！ 我们还不能改！</p>
+<ul>
+<li>使 A.prototype 的 <strong>原型</strong> 指向 B.prototype，也就是 <code>A.prototype.__proto__</code> –&gt; B.prototype</li>
+</ul>
+<p>我们知道, 一个 <strong>构造函数</strong> 的 <strong>实例</strong> 的 <strong>原型</strong>指针 (<code>__proto__</code>) 指向 <strong>构造函数</strong>的 <strong>原型对象</strong>( prototype )。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A.prototype = new B();</div></pre></td></tr></table></figure>
+<p>这样相当于， <code>A.prototype.__proto__</code> –&gt; B.prototype,</p>
+<p>当我们改变 A.prototype 的值的时候 B.prototype 并不会受影响</p>
+<p>但是，由于 A.prototype 被覆盖( <strong>重写</strong> ), <strong>A.prototype.construct</strong> 也没有了, 但是！ 我们可以<strong>手动添加</strong>！ 并<strong>不会</strong>影响到 B.prototype！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A.prototype.construct = A;</div></pre></td></tr></table></figure>
+<p>综上，第二种方法，明显优于第一种。<br>而且第二种方法还有什么好处呢？</p>
+<p><strong>我们不仅可以取到 B.prototype 里的各种方法, 属性。 而且，由于 A.prototype 是 B 的实例，A.prototype 的自身已经有了在 B 中声明的方法和属性。 这也就是我们所说的 继承。 </strong></p>
+<hr>
+<p>写完这个, 想通了好多以前不理解的，开心Y(^<em>^)Y</em>)</p>
+<p>写博客真好～</p>
+<p>一定要坚持下去！！</p>
+<blockquote><p>参考：<br><em>JavaScript 高级程序设计</em></p>
 </blockquote>
 
       
@@ -455,6 +497,8 @@
             <a href="/tags/抄抄抄/" rel="tag"># 抄抄抄</a>
           
             <a href="/tags/JS-基础/" rel="tag"># JS 基础</a>
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
           
             <a href="/tags/原型/" rel="tag"># 原型</a>
           
@@ -633,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数，原型，实例"><span class="nav-number">1.</span> <span class="nav-text">构造函数，原型，实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链"><span class="nav-number">2.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念："><span class="nav-number">2.1.</span> <span class="nav-text">概念：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数，原型，实例"><span class="nav-number">1.</span> <span class="nav-text">构造函数，原型，实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小小的总结一下"><span class="nav-number">1.1.</span> <span class="nav-text">小小的总结一下</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链"><span class="nav-number">2.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#我的理解"><span class="nav-number">2.2.</span> <span class="nav-text">我的理解</span></a></li></ol></li></ol></div>
             
 
           </div>
