@@ -90,36 +90,36 @@
 
 
 
-<meta name="description" content="定义所谓 Promise, 简单说就是一个容器。里面保存着某个 未来才会 结束的事件 ( 通常是一个异步操作 ) 的 结果。
+<meta name="description" content="定义Promise 是对异步编程的一种抽象。它是一个代理对象，代表一个必须进行异步处理的函数 返回的值或抛出的异常。
 
 Promise 对象是一个 返回值的代理，这个返回值在 promise 对象创建时未必已知。
 
 它允许你为异步操作的成功返回值 ／ 失败信息指定处理方法。
 
-这使异步方法可以像同步方法那样返回值： 异步方法会返回一个包含原返回值的 promise 对象来替代原返回值">
+这使异步方法可以像同步方法那样返回值 ( 防止 Callback Hell, 深入了解请点击这里)： 异步方法会返回一个包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="promise">
-<meta property="og:url" content="http://zhangxiaoxu.com/2016/12/15/promise/index.html">
+<meta property="og:title" content="new promise">
+<meta property="og:url" content="http://zhangxiaoxu.com/2017/02/03/newPromise/index.html">
 <meta property="og:site_name" content="Vivian blog">
-<meta property="og:description" content="定义所谓 Promise, 简单说就是一个容器。里面保存着某个 未来才会 结束的事件 ( 通常是一个异步操作 ) 的 结果。
+<meta property="og:description" content="定义Promise 是对异步编程的一种抽象。它是一个代理对象，代表一个必须进行异步处理的函数 返回的值或抛出的异常。
 
 Promise 对象是一个 返回值的代理，这个返回值在 promise 对象创建时未必已知。
 
 它允许你为异步操作的成功返回值 ／ 失败信息指定处理方法。
 
-这使异步方法可以像同步方法那样返回值： 异步方法会返回一个包含原返回值的 promise 对象来替代原返回值">
+这使异步方法可以像同步方法那样返回值 ( 防止 Callback Hell, 深入了解请点击这里)： 异步方法会返回一个包">
 <meta property="og:image" content="http://img.jackon.me/promise-resolve.png">
 <meta property="og:image" content="http://img.jackon.me/promise-reject.png">
-<meta property="og:updated_time" content="2017-02-03T15:13:11.000Z">
+<meta property="og:updated_time" content="2017-02-03T18:56:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="promise">
-<meta name="twitter:description" content="定义所谓 Promise, 简单说就是一个容器。里面保存着某个 未来才会 结束的事件 ( 通常是一个异步操作 ) 的 结果。
+<meta name="twitter:title" content="new promise">
+<meta name="twitter:description" content="定义Promise 是对异步编程的一种抽象。它是一个代理对象，代表一个必须进行异步处理的函数 返回的值或抛出的异常。
 
 Promise 对象是一个 返回值的代理，这个返回值在 promise 对象创建时未必已知。
 
 它允许你为异步操作的成功返回值 ／ 失败信息指定处理方法。
 
-这使异步方法可以像同步方法那样返回值： 异步方法会返回一个包含原返回值的 promise 对象来替代原返回值">
+这使异步方法可以像同步方法那样返回值 ( 防止 Callback Hell, 深入了解请点击这里)： 异步方法会返回一个包">
 <meta name="twitter:image" content="http://img.jackon.me/promise-resolve.png">
 
 
@@ -148,13 +148,13 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
 
 
 
-  <link rel="canonical" href="http://zhangxiaoxu.com/2016/12/15/promise/"/>
+  <link rel="canonical" href="http://zhangxiaoxu.com/2017/02/03/newPromise/"/>
 
 
 
 
 
-  <title> promise | Vivian blog </title>
+  <title> new promise | Vivian blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -295,7 +295,7 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://zhangxiaoxu.com/2016/12/15/promise/">
+  <link itemprop="mainEntityOfPage" href="http://zhangxiaoxu.com/2017/02/03/newPromise/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Vivian">
@@ -319,7 +319,7 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
             
             
               
-                promise
+                new promise
               
             
           </h1>
@@ -332,8 +332,8 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T13:56:49+08:00">
-                2016-12-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-03T23:30:35+08:00">
+                2017-02-03
               </time>
             
 
@@ -386,44 +386,44 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
       
 
       
-        <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>所谓 Promise, 简单说就是一个容器。里面保存着某个 <strong>未来</strong>才会 <em>结束的事件</em> ( 通常是一个异步操作 ) 的 <strong>结果</strong>。</p>
+        <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Promise 是对异步编程的一种抽象。它是一个代理对象，代表一个必须进行异步处理的函数 <strong>返回的值或抛出的异常</strong>。</p>
 <ul>
 <li><p>Promise 对象是一个 <strong>返回值的代理</strong>，这个返回值在 promise 对象创建时未必已知。</p>
 </li>
 <li><p>它允许你为异步操作的成功返回值 ／ 失败信息指定处理方法。</p>
 </li>
-<li><p>这使异步方法可以像同步方法那样返回值： 异步方法会返回一个包含原返回值的 promise 对象来替代原返回值</p>
+<li><p>这使异步方法可以像同步方法那样返回值 ( 防止 Callback Hell, 深入了解请点击<a href="http://callbackhell.com" target="_blank" rel="external">这里</a>)： 异步方法会返回一个包含原返回值的 promise 对象来替代原返回值。</p>
 </li>
 </ul>
 <a id="more"></a>
-<p>Promise 对象有以下几种状态：</p>
+<p>Promise 对象有以下 3 种状态：</p>
 <ul>
 <li>pending</li>
-<li>fufilled 成功的操作</li>
-<li>rejected 失败的操作</li>
+<li>fufilled</li>
+<li>rejected</li>
 </ul>
-<p>pending 可转换带着 <strong>一个成功值的 fulfilled 状态</strong>,<br>也可变成一个 <strong>带着失败信息的 rejected 状态</strong></p>
+<p>pending 可转换成带着 <strong>一个成功值的 fulfilled 状态</strong>, 或者一个 <strong>带着失败信息的 rejected 状态</strong>。</p>
 <ul>
-<li><p>当状态发生转换的时候， promise.then 绑定的方法就会被调用</p>
-</li>
-<li><p>当绑定方法时， promise 对象已经处于 fulfilled / rejected 状态，则相应的方法会被 <strong>立刻调用</strong></p>
+<li><p>当 promise 对象处于 fulfilled / rejected 状态，则promise.then 绑定的相应的方法就会被<strong>立刻调用</strong></p>
 </li>
 <li><p>一个 promise 对象处在 fulfilled ／ rejected 状态时它也可以被称为 settled  状态。 ( resolved 表示 promise 对象处于 settled  状态，或 promise 对象被 <strong>锁定</strong>在调用链中 )</p>
 </li>
-<li><p>因为 Promise.prototype.then 和 Promise.prototype.catch 方法 <strong>返回 promises  对象</strong>，所以它们可以被链式调用</p>
+<li><p>Promise.prototype.then 和 Promise.prototype.catch 方法 <strong>返回 promises  对象</strong>，即它们可以被链式调用</p>
 </li>
 </ul>
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>new Promise( executor );<br>new Promise(function(resolve, reject) {…} );</p>
 <p>参数：<br>executor</p>
 <ul>
-<li>函数</li>
-<li>默认有 resolve, reject 两个参数</li>
-<li>在创建 Promise 对象的时候会 <strong>立即执行</strong> ( 在 Promise 构造函数返回 Promise 对象之前就会被执行 )</li>
-<li>调用 resolve 和 reject 函数会分别触发  promise 的成功或者 失败。</li>
-<li><p>这个函数参数 通常被用来执行一些异步操作，操作完成后可以选择 调用 resolve 来触发 promise 的成功状态，或者，在出现错误的时候调用 reject 函数来触发 promise 的失败。<br>-</p>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3></li>
-<li><p>Promise.prototype 表示 Promise 构造器的原型</p>
+<li>函数 ( 默认有 resolve, reject 两个参数 )<br>-</li>
+<li><p>在创建 Promise 对象的时候会 <strong>立即执行</strong> ( 在 Promise 构造函数返回 Promise 对象之前就会被开始执行 )</p>
 </li>
+<li><p>调用 resolve 和 reject 函数会分别触发  promise 的成功( fulfilled ) 或者 失败 ( rejected )</p>
+</li>
+<li><p>这个函数参数 通常被用来执行一些异步操作，操作完成后可以选择 调用 resolve 来触发 promise 的成功状态，或者，在出现错误的时候调用 reject 函数来触发 promise 的失败。</p>
+</li>
+</ul>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>Promise.prototype 表示 Promise 构造器的原型</li>
 <li>Promise.length 长度：1 ( 构造器参数数目 )</li>
 </ul>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
@@ -441,30 +441,31 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
 </li>
 <li><p>Promise.race( iterable )<br>当 iterable 参数里的任意一个 promise 被成功或失败后，<br>父 promise 也会马上用子 promise 的成功返回值 或失败详情作为参数调用 父 promise 绑定的相应句柄, 并返回该 promise 对象。</p>
 </li>
-</ul>
-<p>NOTE !!! ： <strong>这个是 promises —&gt; Promise.all  实现的原理</strong></p>
-<ul>
-<li>Promise.reject( reason )</li>
-</ul>
-<p>返回一个 因为 reason 而被拒绝 (rejected) 的 Promise 对象</p>
-<ul>
 <li><p>Promise.resolve( value )</p>
 <ul>
-<li><p>Returns a <em>Promise</em> object that is resolved with the given value .  ( fulfill )</p>
+<li><p>返回一个 <em>Promise</em> 对象 ( 可以将现有的对象转化为 Promise 对象 )。</p>
 </li>
-<li><p>如果该 value 为 thenable ( 带有 then 方法 )</p>
+<li><p>如果参数 <strong>不是</strong> 一个 Promise 对象，则返回的新的 状态为 fulfilled 的 Promise 对象。并且，Promise.resolve 的参数也是 then 的回调函数的参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let secondPromiseT = Promise.resolve(&apos;resolve&apos;);</div><div class="line">secondPromiseT.then(data =&gt; &#123;</div><div class="line">  console.log(data);     // &apos;resolve&apos;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果参数 <strong>是</strong> 一个的 Promise (thenable) 对象，则返回的新的 Promise 对象 与 参数 Promise 的状态相同的 。<br>新的 Promise 对象的状态为 fulfilled 时，then 的参数是原 Promise 中调用 resolve 函数的参数。<br>新的 Promise 对象的状态为 rejected 时，then 的参数是 原 Promise。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let secondPromiseT = Promise.resolve(&apos;resolve&apos;);</div><div class="line"></div><div class="line">let arguPromise = Promise.resolve(secondPromiseT);</div><div class="line">arguPromise.then(data =&gt; &#123;</div><div class="line">  console.log(data);   // &apos;resolve&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果参数 <strong>是</strong> 一个 thenable ( 即带有then方法 ) 的对象，则返回的 <strong>新的 Promise</strong> 与 原 Promise 的最终状态相同。</p>
+<p>fulfilled 状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">let thenableF = &#123;</div><div class="line">  then: function(resolve) &#123;</div><div class="line">    resolve(&quot;RESOLVE&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let arguThen = Promise.resolve(thenableF);</div><div class="line"></div><div class="line">arguThen.then(data =&gt; &#123;</div><div class="line">  console.log(data);    // &quot;RESOLVE&quot;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>rejected 状态 ( 不是 用的 reject )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">let thenableF = &#123;</div><div class="line">  then: function(resolve) &#123;</div><div class="line">    throw new TypeError(&quot;Throwing&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let arguThenF = Promise.resolve(thenableF);</div><div class="line"></div><div class="line">arguThenF.then(null, data =&gt; &#123;</div><div class="line">  console.log(data);    // [object Error] &#123; ... &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Promise.reject( value )</p>
 <ul>
-<li>返回的 Promise 对象会 “跟随” 这个value 并采用这个 value 的最终状态</li>
-</ul>
-</li>
-<li><p>value 没有带 then 方法,  返回的 Promise will be fulfilled with the value</p>
-</li>
-<li><p>如果你不知道 value 是不是一个 promise, Promise.resolve( value )  it instead and work with the return value as a promise.</p>
-</li>
+<li>返回一个状态 为 <strong>rejected</strong> 的, 新的 Promise 对象 ( 状态一定是 rejected )。  其他的基本上与 resolve 刚好相反。</li>
 </ul>
 </li>
 </ul>
-<h2 id="👆没有理解-看例子。。"><a href="#👆没有理解-看例子。。" class="headerlink" title="👆没有理解!! 看例子。。"></a>👆没有理解!! 看例子。。</h2><h3 id="Promise-prototype"><a href="#Promise-prototype" class="headerlink" title="Promise prototype"></a>Promise prototype</h3><h4 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h4><ul>
+<h3 id="Promise-prototype"><a href="#Promise-prototype" class="headerlink" title="Promise prototype"></a>Promise prototype</h3><h4 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h4><ul>
 <li>Promise.prototype.constructor</li>
 </ul>
 <p>返回 the function that created an instance’s prototype.<br>这个函数默认为是 <em>Promise function</em></p>
@@ -485,11 +486,11 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
 <ul>
 <li><p>向当前的 promise 添加处理 fulfillment and rejection 的函数 onFulfiles, onRejected</p>
 </li>
-<li><p>并且 ( 这个 then 函数 ) 返回一个<em>新的 promise </em></p>
+<li><p>返回一个<em>新的 promise </em></p>
 </li>
-<li><p>这个<em>新的 promise</em> 解析 (resolving ) 处理函数 ( onFufilled / onRejected ) 的 返回值</p>
+<li><p>如果两个参数都被省略，或提供的不是函数，那么将创建一个没有其他处理程序的新 Promise。 这个新的 Promise 采用原 Promise 的最终状态。</p>
 </li>
-<li><p>或者 如果这个 promise 没有被处理 , <em>这个新的 promise</em> 解析成 它原来的 settled 值。 ( 比如说，相关的处理程序 onFulfilled 或者 onRejected 不是一个函数 )</p>
+<li><p>如果某个参数都被省略，或提供的不是函数，那么将创建一个相应处理程序的新 Promise。 这个新的 Promise 采用原 Promise 的最终状态。</p>
 </li>
 </ul>
 </li>
@@ -561,8 +562,8 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/15/array/" rel="next" title="数组">
-                <i class="fa fa-chevron-left"></i> 数组
+              <a href="/2016/12/23/timers/" rel="next" title="JS 定时器">
+                <i class="fa fa-chevron-left"></i> JS 定时器
               </a>
             
           </div>
@@ -570,10 +571,6 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/15/prototype/" rel="prev" title="原型">
-                原型 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -727,7 +724,7 @@ Promise 对象是一个 返回值的代理，这个返回值在 promise 对象�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">3.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">4.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#👆没有理解-看例子。。"><span class="nav-number"></span> <span class="nav-text">👆没有理解!! 看例子。。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise-prototype"><span class="nav-number">1.</span> <span class="nav-text">Promise prototype</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性-1"><span class="nav-number">1.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法-1"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">2.</span> <span class="nav-text">补充:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概念："><span class="nav-number">2.0.1.</span> <span class="nav-text">概念：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#语法-1"><span class="nav-number">2.0.2.</span> <span class="nav-text">语法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位置名称的可视化："><span class="nav-number"></span> <span class="nav-text">位置名称的可视化：</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">3.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">4.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise-prototype"><span class="nav-number">5.</span> <span class="nav-text">Promise prototype</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性-1"><span class="nav-number">5.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法-1"><span class="nav-number">5.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">6.</span> <span class="nav-text">补充:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概念："><span class="nav-number">6.0.1.</span> <span class="nav-text">概念：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#语法-1"><span class="nav-number">6.0.2.</span> <span class="nav-text">语法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位置名称的可视化："><span class="nav-number"></span> <span class="nav-text">位置名称的可视化：</span></a></div>
             
 
           </div>
