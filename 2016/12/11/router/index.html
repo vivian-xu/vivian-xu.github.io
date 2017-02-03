@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Dosis:300,300italic,400,400italic,700,700italic|Courgette:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="总结,React," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最近一直在使用 React 开发页面，所以对 React 相关的文章什么的都留意了些。在查资料的时候经常看到关于 React 服务端渲染这个话题，但是都没有去看文章，只不过心里一直有疑问，为什么需要服务端渲染，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React-Router 一点一点深入">
+<meta property="og:url" content="http://zhangxiaoxu.com/2016/12/11/router/index.html">
+<meta property="og:site_name" content="Vivian blog">
+<meta property="og:description" content="最近一直在使用 React 开发页面，所以对 React 相关的文章什么的都留意了些。在查资料的时候经常看到关于 React 服务端渲染这个话题，但是都没有去看文章，只不过心里一直有疑问，为什么需要服务端渲染，">
+<meta property="og:updated_time" content="2016-12-15T05:07:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React-Router 一点一点深入">
+<meta name="twitter:description" content="最近一直在使用 React 开发页面，所以对 React 相关的文章什么的都留意了些。在查资料的时候经常看到关于 React 服务端渲染这个话题，但是都没有去看文章，只不过心里一直有疑问，为什么需要服务端渲染，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangxiaoxu.com/2016/12/11/router/"/>
+
+
+
+
+
+  <title> React-Router 一点一点深入 | Vivian blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a36fb7c2597833dc69c07d45b78570ca";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vivian blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">better Me ❤️</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zhangxiaoxu.com/2016/12/11/router/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Vivian">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Vivian blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Vivian blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React-Router 一点一点深入
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-11T22:47:26+08:00">
+                2016-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近一直在使用 React 开发页面，所以对 React 相关的文章什么的都留意了些。在查资料的时候经常看到关于 React 服务端渲染这个话题，但是都没有去看文章，只不过心里一直有疑问，为什么需要服务端渲染，</p>
+<a id="more"></a>
+<h4 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h4><p>后来知道因为所有内容都是写在 React 里面，即 js 里面的，需要 js 去填充主要的内容到 index.html，而 js 加载是在 index.html 已经渲染出来了之后才执行的事。<br>而爬虫们呢，一般只会爬初始的 html 页面，所以导致爬虫们什么关键的内容都爬不到，因此 SEO 不好。</p>
+<p>所以可以选择，服务器端渲染，然后将一个完整的 html 页面给 浏览器端使用。</p>
+<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>然后，昨天知道第二个原因。</p>
+<p>就是路由相关。<br>我昨天再浏览自己做的 demo 网页的时候，突然发现我一刷新返回了 404，本来以为是网络什么的问题，分别拿电脑，别人的手机，别的网页都试了几次，发现的确一直是这个样子的，于是我疑惑为什么？</p>
+<p>刚开始稍微想了下，单页应用，就是只有一个页面，具体的 url 匹配操作应该是 react-router 在做的事。想起来刚开始配 webpack-dev-server 的时候，就是只有主页面能请求到东西，后来把 server 的 historyApiFallback 设置为 true，就可以了。</p>
+<p>然后在 google 上找相关资料，找到了 stackoverflow  的这个 <a href="http://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually" target="_blank" rel="external">React-router urls don’t work when refreshing or writting manually</a></p>
+<p>然后这个最赞的回复我觉得讲得挺清楚的：</p>
+<h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><p>出现的原因就是过去只有 server 来解析 url , 而现在有 2 个了。</p>
+<p>当用户通过 <a href="http://example.com/about" target="_blank" rel="external">http://example.com/about</a> 来访问页面的时候，<br>过去的请求一个 url 的时候，直接是发给 server 端的，由 Server 来解析 URL 中的路径 /about，然后判断该返回哪个页面给 用户，之后将页面返回。</p>
+<p>现在由 React-router 给提供的客户端渲染，事情简单了很多。</p>
+<ul>
+<li><p>第一步：刚开始的时候，客户端没有任何 JS 代码，所以第一个请求 ( <a href="http://example.com" target="_blank" rel="external">http://example.com</a> )一定是发给 <strong>Server</strong> 的，然后 Server 返回一个页面，页面中含有<strong>请求 React 和 React-router</strong> 的 script 标签。<br>然后，当请求到了 React /React-router 时候就开始了第二步。</p>
+</li>
+<li><p>第二步：假设用户点击了 ‘<strong>About us</strong>‘ 这个链接 ，只改变了<strong>本地 URL</strong>到 <a href="http://example.com/about" target="_blank" rel="external">http://example.com/about</a> ( 利用 <strong>History API </strong>), 而<strong>没有</strong>向 服务器端发任何请求，而是 <strong>React-router </strong>替代Server这个工作，它解析了 URL 中的路径，判断哪个 Resct view 去 渲染, 然后渲染它。假设 about 页面不需要任何 rest 调用，你已经完成了。 这样 不需要任何 的 服务端调用， 页面从 Home 到  About us。</p>
+</li>
+</ul>
+<p>所以当你<strong>点击</strong>一个链接的时候，运行的 JS 操纵地址栏中的 URL, 它不会让页面<strong>重新刷新</strong>，而是让 <strong>React-router</strong> 去执行客户端的页面转换。</p>
+<p>现在考虑一下，当你复制这个 URL ( <a href="http://example.com/about" target="_blank" rel="external">http://example.com/about</a> ) 给你朋友 ，她粘贴 URL 到地址栏上的时候。</p>
+<p>这个时候她相当于还在<strong>第一步</strong>，因为没有下载网页，也没有 React-Router 运行。所以会向 <strong>Server</strong> 发送请求访问。</p>
+<p>这里就是问题所在。现在，你只是放了一个静态 HTML 在你 server 的网站根目录中，但是当请求访问其他 URLs 的时候 server 会返回 404。</p>
+<p>同样的 URLs 访问正常是因为 React-router 做了这些路由的工作，但是 Server 肯定失败，除非<strong>你能让 Server 端也能解析这些 URL</strong>。</p>
+<h5 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h5><p>主要是这几种:</p>
+<ul>
+<li><p>完全绕开这个问题 ( Hash History )</p>
+</li>
+<li><p>设置 Server 端所有 URL ( /* ) 都返回 相同的 index.html ( 通过使用 Browser History并且设置 Server 返回 index.html ),</p>
+</li>
+<li><p>在特定的路由上增加一些脚本，( 用简单的 PHP 返回一些 有内容的重要的页面。。<strong>这个不懂</strong>  )( Hybrid 混合方式？ )</p>
+</li>
+<li><p>在 Server 端 ( Node.js ) 和客户端运行同样的 JS ( Isomorphic )</p>
+</li>
+</ul>
+<h4 id="我的解决方法"><a href="#我的解决方法" class="headerlink" title="我的解决方法"></a>我的解决方法</h4><p>因为，我们 Server 端是 <strong>nginx</strong> ，所以选择了第二种方法。</p>
+<p>本来是想让 男票搞定的，但是，我们两对 nginx 的语法都不是很熟，所以我搜了一个发现这个 <a href="https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#configuring-your-server" target="_blank" rel="external">react-router/docs/guides/Histories.md</a>。</p>
+<h2 id="然后照着那个一设置，OK-了！"><a href="#然后照着那个一设置，OK-了！" class="headerlink" title="然后照着那个一设置，OK 了！"></a>然后照着那个一设置，OK 了！</h2><h5 id="牛逼闪闪的男票补充："><a href="#牛逼闪闪的男票补充：" class="headerlink" title="牛逼闪闪的男票补充："></a>牛逼闪闪的男票补充：</h5><p>但是，所有的都返回 index.html 能用，但是不太安全，也不太合理。</p>
+<p>只有用户刷新／直接打开其他页面的时候，才会出问题。大部分页面，用户不会直接输入url 打开的。</p>
+<p>所以，只把用户会输入 url 直接打开的页面，配一下就好了。</p>
+<p>也就是在这几个特定的路由上增加一些脚本，让他们直接返回 index.html, 而这个特定的路由的概念，又可以扩展为 所有有效的 URL</p>
+<p>而URL ( /* )  匹配的时候，有效无效的，都会匹配上，这是不合理的。</p>
+<p>我怎么就没有想到呢···· (￣∇￣)</p>
+<hr>
+<p>虽然，这个问题解决了，但是还是对 SEO 不好的。以后肯定会用上 <strong>Isomorphic</strong> 的方案的，嗯，我就先占个坑吧，毕竟，Node.js 还没有学会。。。。</p>
+<blockquote><p>参考：</p>
+<p><a href="http://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually" target="_blank" rel="external">React-router urls don’t work when refreshing or writting manually</a></p>
+<p><a href="https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#configuring-your-server" target="_blank" rel="external">react-router/docs/guides/Histories.md</a></p>
+<p><a href="http://stylechen.com/react-router.html" target="_blank" rel="external">从 React Router 谈谈路由的那些事</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/11/margin collaspe/" rel="next" title="折叠外边距 ( Collapsing margins )">
+                <i class="fa fa-chevron-left"></i> 折叠外边距 ( Collapsing margins )
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/12/webpack/" rel="prev" title="webpack 配置">
+                webpack 配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Vivian" />
+          <p class="site-author-name" itemprop="name">Vivian</p>
+          <p class="site-description motion-element" itemprop="description">从现在开始</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/vivian-xu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+          
+
+          
+            
+
+              <span class="links-of-author-item">
+                
+                  <i class="fa fa-fw fa-map-marker"></i>
+                
+                Shanghai
+              </span>
+
+            
+
+              <span class="links-of-author-item">
+                
+                  <i class="fa fa-fw fa-envelope"></i>
+                
+                hi@zhangxiaoxu.com
+              </span>
+
+            
+          
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SEO"><span class="nav-number">1.</span> <span class="nav-text">SEO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路由"><span class="nav-number">2.</span> <span class="nav-text">路由</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原因"><span class="nav-number">2.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方法"><span class="nav-number">2.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#我的解决方法"><span class="nav-number">3.</span> <span class="nav-text">我的解决方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后照着那个一设置，OK-了！"><span class="nav-number"></span> <span class="nav-text">然后照着那个一设置，OK 了！</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#牛逼闪闪的男票补充："><span class="nav-number">0.1.</span> <span class="nav-text">牛逼闪闪的男票补充：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vivian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

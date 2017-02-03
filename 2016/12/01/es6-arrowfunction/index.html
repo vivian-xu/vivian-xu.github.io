@@ -1,0 +1,777 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Dosis:300,300italic,400,400italic,700,700italic|Courgette:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="抄抄抄,ES6," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="基本定义1234567// ES5var selected = allJobs.filter(function (job) &amp;#123;  return job.isSelected();&amp;#125;);// ES6var selected = allJobs.filter(job =&amp;gt; job.isSelected());
+
+当函数只有  一个参数 的时候，可以使用新标准中的箭头函数，它的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="箭头函数">
+<meta property="og:url" content="http://zhangxiaoxu.com/2016/12/01/es6-arrowfunction/index.html">
+<meta property="og:site_name" content="Vivian blog">
+<meta property="og:description" content="基本定义1234567// ES5var selected = allJobs.filter(function (job) &amp;#123;  return job.isSelected();&amp;#125;);// ES6var selected = allJobs.filter(job =&amp;gt; job.isSelected());
+
+当函数只有  一个参数 的时候，可以使用新标准中的箭头函数，它的">
+<meta property="og:updated_time" content="2016-12-05T06:19:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="箭头函数">
+<meta name="twitter:description" content="基本定义1234567// ES5var selected = allJobs.filter(function (job) &amp;#123;  return job.isSelected();&amp;#125;);// ES6var selected = allJobs.filter(job =&amp;gt; job.isSelected());
+
+当函数只有  一个参数 的时候，可以使用新标准中的箭头函数，它的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangxiaoxu.com/2016/12/01/es6-arrowfunction/"/>
+
+
+
+
+
+  <title> 箭头函数 | Vivian blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a36fb7c2597833dc69c07d45b78570ca";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vivian blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">better Me ❤️</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zhangxiaoxu.com/2016/12/01/es6-arrowfunction/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Vivian">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Vivian blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Vivian blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                箭头函数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T19:55:08+08:00">
+                2016-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// ES5</div><div class="line">var selected = allJobs.filter(function (job) &#123;</div><div class="line">  return job.isSelected();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// ES6</div><div class="line">var selected = allJobs.filter(job =&gt; job.isSelected());</div></pre></td></tr></table></figure>
+<ul>
+<li>当函数只有  <strong>一个参数</strong> 的时候，可以使用新标准中的箭头函数，它的语法非常简单：标识符=&gt;表达式。你无需输入function和return，一些小括号、大括号以及 <strong>分号</strong> 也可以省略。</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>如果要写一个接受多重参数（也可能没有参数，或者是不定参数、默认参数、参数解构）的函数，你需要用 <strong>小括号</strong>  包裹 <strong>参数list</strong>。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// ES5</div><div class="line">  var total = values.reduce(function (a, b) &#123;</div><div class="line">    return a + b;</div><div class="line">  &#125;, 0);</div><div class="line">// ES6</div><div class="line">  var total = values.reduce((a, b) =&gt; a + b, 0);</div></pre></td></tr></table></figure>
+<p>如果函数逻辑稍微复杂一些，不能一行代码就完成的。怎么办呢？</p>
+<ul>
+<li>除表达式外，箭头函数还可以包含一个 <strong>块语句</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// ES5</div><div class="line">$(&quot;#confetti-btn&quot;).click(function (event) &#123;</div><div class="line">  playTrumpet();</div><div class="line">  fireConfettiCannon();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这是它们在ES6中看起来的样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// ES6</div><div class="line">$(&quot;#confetti-btn&quot;).click(event =&gt; &#123;</div><div class="line">  playTrumpet();</div><div class="line">   fireConfettiCannon();</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h4 id="返回对象字面量"><a href="#返回对象字面量" class="headerlink" title="返回对象字面量"></a>返回对象字面量</h4><h5 id="注意！！这里有个坑"><a href="#注意！！这里有个坑" class="headerlink" title="注意！！这里有个坑"></a>注意！！这里有个坑</h5><p> 使用了块语句( { } ) 的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</p>
+<p> 这样有什么问题呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 为与你玩耍的每一个小狗创建一个新的空对象</div><div class="line">var chewToys = puppies.map(puppy =&gt; &#123;&#125;);   // 这样写会报Bug！</div></pre></td></tr></table></figure>
+<p>你以为 你为每一个小狗创建一个新的空对象，但是 其实根本不是，这样是 <strong>会报错</strong> 的,为什么呢?</p>
+<p>因为箭头函数还可以包含一个 <strong>块语句</strong>！！！</p>
+<p>ES6中的规则是，<strong>紧随</strong> 箭头的 { 被解析为块的开始，而不是对象的开始。因此，puppy =&gt; {} 这段代码就被解析为没有任何行为并返回undefined的箭头函数 !!</p>
+<p>所以</p>
+<p>返回对象字面量时</p>
+<h2 id="必须要用-小括号将返回的对象-括起来！！"><a href="#必须要用-小括号将返回的对象-括起来！！" class="headerlink" title="必须要用 小括号将返回的对象 括起来！！"></a>必须要用 小括号将返回的对象 括起来！！</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var chewToys = puppies.map(puppy =&gt; (&#123;&#125;))</div></pre></td></tr></table></figure>
+<h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><p>箭头函数还有一个 特点</p>
+<ul>
+<li>它 <strong>没有自己的this</strong> 值，箭头函数内的this值 <strong>继承自外围作用域</strong>。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  ...</div><div class="line">  addAll: function addAll(pieces) &#123;</div><div class="line">    var self = this;</div><div class="line"></div><div class="line">    _.each(pieces, function (piece) &#123;</div><div class="line">      self.add(piece);</div><div class="line">    &#125;);</div><div class="line">  &#125;,</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面这个对象的 addAll 方法中， 有一个 匿名函数，这个匿名函数是拿不到 外部函数的 this 的 ( 内部 上下文，拿不到 外部的 this, arguments )，而我们需要用 this.add 这个 方法，所以 我们，外部能拿到 this 的地方，将 this 赋值给另一个 内部函数可以访问到 变量, 然后我们在内部函数通过访问这个变量来访问 this.add 方法。</p>
+<p><strong>但是用 箭头函数 就不用这么麻烦了。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// ES6</div><div class="line"> &#123;</div><div class="line">   ...</div><div class="line">   addAll: function addAll(pieces) &#123;</div><div class="line">     _.each(pieces,  piece =&gt; this.add(piece));</div><div class="line">   &#125;,</div><div class="line">   ...</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>在这里 <strong>addAll</strong> 方法先从它的 <strong>调用者</strong>处获取了this值，然后由于内部函数是一个 <strong>箭头函数</strong>，所以它继承了 <strong>外围作用域</strong>的this值 ( 即 addAll )。</p>
+<h4 id="使用-call-或-apply-调用"><a href="#使用-call-或-apply-调用" class="headerlink" title="使用 call 或 apply 调用"></a>使用 call 或 apply 调用</h4><ul>
+<li>由于 this 已经在词法层面完成了绑定，通过 call() 或 apply() 方法调用一个函数时，只是传入了参数而已，对 this 并 <strong>没有什么影响</strong><br>-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var adder = &#123;</div><div class="line">  base : 1,</div><div class="line"></div><div class="line">  add : function(a) &#123;</div><div class="line">    var f = v =&gt; v + this.base;</div><div class="line">    return f(a);</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  addThruCall: function(a) &#123;</div><div class="line">    var f = v =&gt; v + this.base;</div><div class="line">    var b = &#123;</div><div class="line">      base : 2</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    return f.call(b, a);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">console.log(adder.add(1));         // 输出 2</div><div class="line">console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3 ——译者注）</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="不绑定-arguments"><a href="#不绑定-arguments" class="headerlink" title="不绑定 arguments"></a>不绑定 arguments</h4><ul>
+<li>箭头函数还有一个特性， 不绑定 arguments，箭头函数不会在其内部暴露出  arguments 对象</li>
+<li>若在函数中将 arguments 赋值给某一变量，则这个变量将会指向，这个箭头函数所在的作用域一个 名为 arguments 的值，如果没有的话就返货 undefined</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var arguments = 42;</div><div class="line">var arr = () =&gt; arguments;</div><div class="line"></div><div class="line">arr(); // 42</div><div class="line"></div><div class="line">function foo() &#123;</div><div class="line">  var f = () =&gt; arguments[0]; // foo&apos;s implicit arguments binding</div><div class="line">  return f(2);</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo(1); // 1</div></pre></td></tr></table></figure>
+<p>上面箭头函数的 arguments 是指向，外部函数的 arguments, 而不是自身的。</p>
+<ul>
+<li><p>虽然箭头函数没有自己的 arguments 对象，但是大多数情形下，rest参数可以给出一个解决方案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function foo() &#123;</div><div class="line">  var f = (...args) =&gt; args[0];</div><div class="line">  return f(2);</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo(1); // 2</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Parsing-order-这个不理解"><a href="#Parsing-order-这个不理解" class="headerlink" title="Parsing order ( 这个不理解 @ @ )"></a>Parsing order ( 这个不理解 @ @ )</h4><p>The arrow in an arrow function is not an operator, but arrow functions have special parsing rules that interact differently with (operator precedence)[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence</a>], compared to a regular function.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let callback;</div><div class="line"></div><div class="line">callback = callback || function() &#123;&#125;; // ok</div><div class="line">callback = callback || () =&gt; &#123;&#125;; // SyntaxError: invalid arrow-function arguments</div><div class="line">callback = callback || (() =&gt; &#123;&#125;);    // ok</div></pre></td></tr></table></figure>
+<h4 id="箭头函数的运用的地方"><a href="#箭头函数的运用的地方" class="headerlink" title="箭头函数的运用的地方"></a>箭头函数的运用的地方</h4><p>在ES6中，你需要遵循以下规则：</p>
+<ul>
+<li>通过object.method()语法调用的方法使用非箭头函数定义，这些函数需要从调用者的作用域中获取一个有意义的this值。</li>
+<li>其它情况全都使用箭头函数。</li>
+</ul>
+<blockquote><p>参考：</p>
+<p><a href="http://www.infoq.com/cn/articles/es6-in-depth-arrow-functions/" target="_blank" rel="external">深入浅出ES6（七）：箭头函数 Arrow Functions
+</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">箭头函数</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/抄抄抄/" rel="tag"># 抄抄抄</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/01/start/" rel="next" title="应该有个开篇的">
+                <i class="fa fa-chevron-left"></i> 应该有个开篇的
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/02/Web-storage/" rel="prev" title="Web 存储">
+                Web 存储 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Vivian" />
+          <p class="site-author-name" itemprop="name">Vivian</p>
+          <p class="site-description motion-element" itemprop="description">从现在开始</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/vivian-xu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+          
+
+          
+            
+
+              <span class="links-of-author-item">
+                
+                  <i class="fa fa-fw fa-map-marker"></i>
+                
+                Shanghai
+              </span>
+
+            
+
+              <span class="links-of-author-item">
+                
+                  <i class="fa fa-fw fa-envelope"></i>
+                
+                hi@zhangxiaoxu.com
+              </span>
+
+            
+          
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本定义"><span class="nav-number">1.</span> <span class="nav-text">基本定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回对象字面量"><span class="nav-number">2.</span> <span class="nav-text">返回对象字面量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意！！这里有个坑"><span class="nav-number">2.1.</span> <span class="nav-text">注意！！这里有个坑</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必须要用-小括号将返回的对象-括起来！！"><span class="nav-number"></span> <span class="nav-text">必须要用 小括号将返回的对象 括起来！！</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#this"><span class="nav-number">1.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-call-或-apply-调用"><span class="nav-number">2.</span> <span class="nav-text">使用 call 或 apply 调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不绑定-arguments"><span class="nav-number">3.</span> <span class="nav-text">不绑定 arguments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parsing-order-这个不理解"><span class="nav-number">4.</span> <span class="nav-text">Parsing order ( 这个不理解 @ @ )</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#箭头函数的运用的地方"><span class="nav-number">5.</span> <span class="nav-text">箭头函数的运用的地方</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vivian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
